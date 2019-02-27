@@ -6,12 +6,12 @@ Projeto de uma aplicação de Eleicões para empresas e entidades de previdênci
 Configurando o projeto e banco de dados.
 ----------------------------------------
 
-O banco de dados esta configurado `MySql Server`, mas como se trata de uma aplicação com `Hibernate`, você pode configura-lo para trabalhar com qualquer outro banco de dados, basta acessar o arquivo `application.yml` dentro de "src\main\resources\paconte default\application.yml.  
+O banco de dados esta configurado para `MySql Server`, mas como se trata de uma aplicação com `Hibernate`, você pode configura-lo para trabalhar com qualquer outro banco de dados, basta acessar o arquivo `application.yml` dentro de "src\main\resources\paconte default\application.yml.  
 
 Os passos básicos são:
 
-1. Importe o projeto no Netbeans(https://netbeans.org/downloads/8.0.2/), Intellij Idea(https://www.jetbrains.com/idea/download/#section=windows) ou sua IDE de preferencia.
-2. Confiure o arquivo `application.yml` caso seu banco de dados padrão não seja o `MySql Server`. 
+1. Importe o projeto no [Netbeans](https://netbeans.org/downloads/8.0.2/), [Intellij Idea](https://www.jetbrains.com/idea/download/#section=windows) ou sua IDE de preferencia.
+2. Confiure o arquivo `application.yml` caso a porta padrão 3306 não estejapadrão ou se seu banco de dados padrão não seja o `MySql Server`. 
 3. Faça o deploy no `Apache Tomcat 6.x` e inicie o servidor;
 4. Acesse a aplicação através da url [http://localhost:8080/](http://localhost:8080/) ;
 8. Crie uma nova eleiçaõ;
