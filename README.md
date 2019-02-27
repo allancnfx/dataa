@@ -12,7 +12,7 @@ Os passos básicos são:
 
 1. Importe o projeto no [Netbeans](https://netbeans.org/downloads/8.0.2/), [Intellij Idea](https://www.jetbrains.com/idea/download/#section=windows) ou sua IDE de preferencia.
 2. Confiure o arquivo `application.yml` caso a porta padrão 3306 não estejapadrão ou se seu banco de dados padrão não seja o `MySql Server`. 
-3. Faça o deploy no `Apache Tomcat 6.x` e inicie o servidor;
+3. Execulte o projeto em sua IDE (obs: Neste caso o Spring boot não precisa configurar o Apache Tomcat, ele já esta encapsulado na aplicação, então é só execultar).
 4. Acesse a aplicação através da url [http://localhost:8080/](http://localhost:8080/) ;
 8. Crie uma nova eleiçaõ;
 9. Cadastre os cargos relacionados;
