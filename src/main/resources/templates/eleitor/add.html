@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>DATA A - Eleições</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+        <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Eleição DATA-A</h1>
+            </div>
+            <h4>
+                Novo Eleitor
+            </h4>
+            <form th:action="@{/eleicao/{eleicaoId}/eleitors/salvar(eleicaoId=${eleicaoId})}" th:method="${eleitor.id} == 0 ? post : put" th:object="${eleitor}" enctype="multipart/form-data">
+                <div class="row">
+                    <input id="id" type="hidden" th:field="*{id}"/>
+                    <div class="form-group col-md-12">
+                        <label for="nome">Nome:</label>
+                        <input class="form-control" id="nomeEleitor" type="text" th:field="*{nomeEleitor}"/>
+                        <div th:if="${#fields.hasErrors('nomeEleitor')}" th:errors="*{nomeEleitor}"></div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="nome">Cpf:</label>
+                        <input class="form-control" id="cpfEleitor" type="text" th:field="*{cpfEleitor}"/>
+                        <div th:if="${#fields.hasErrors('cpfEleitor')}" th:errors="*{cpfEleitor}"></div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Salvar</button>
+                    </div>
+                </div>
+            </form>
+            <hr/>
+            
+            <a class="btn btn-light" th:href="@{/eleicao/{id}/eleitors/listar(id=${eleicaoId})}">Voltar</a>
+            
+            <hr/>
+            <footer class="footer">
+                <p>&copy; 2019 Allan Christian Vieira</p>
+            </footer>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Projeto Eleições</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+        <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Projeto Eleição DATA A</h1>
+            </div>
+
+            <div>
+                <a class="btn btn-primary" th:href="@{/eleicao/cadastro}">Nova eleição</a>
+            </div>
+            <hr/>
+
+            <div th:if="${eleicoes != null}">
+                <h4>
+                    Eleições Cadastradas
+                </h4>
+
+                <div th:if="${mensagem != null}">
+                    <div class="alert alert-info" role="alert">
+                        <span th:text="${mensagem}">mensagem</span>
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome Eleição</th>
+                            <th>Inicio</th>
+                            <th>Fim</th>
+                            <th>Ação</th>
+                            <th>Registros</th>
+                            <th>Resultados</th>
+                        </tr>
+                    </thead>
+                    <tr th:each="eleicao: ${eleicoes}">
+                        <td><a th:text="${eleicao.nomeEleicao}" th:href="@{/eleicao/{id}/cargos/listar(id=${eleicao.id})}">nome</a></td>
+                        <td th:text="${eleicao.dataInicio}">Iinicio</td>
+                        <td th:text="${eleicao.dataFinal}">Fim</td>
+                        <td>
+                            <a class="btn btn-sm btn-info" th:href="@{/eleicao/{id}/atualizar(id=${eleicao.id})}">Editar</a>
+                            <a class="btn btn-sm btn-danger" th:href="@{/eleicao/{id}/remover(id=${eleicao.id})}">Excluir</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/cargos/listar(id=${eleicao.id})}">Cargos</a>
+                            <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/candidatos/listar(id=${eleicao.id})}">Candidatos</a>
+                            <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/eleitors/listar(id=${eleicao.id})}">Eleitor</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/resultado/listar(id=${eleicao.id})}">Parcial</a>
+                            <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/images/listar(id=${eleicao.id})}">Imagens</a>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div th:if="${#lists.isEmpty(eleicoes)}">
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    0 eleições cadastradas!
+                </div>
+            </div>
+            <hr/>
+
+            <a class="btn btn-light" href="/home">Voltar</a>
+            <hr/>
+
+            <footer class="footer">
+                <p>&copy; 2019 Allan Christian Vieira</p>
+            </footer>
+
+        </div>
+    </body>
+</html>

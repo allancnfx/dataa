@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Projeto Eleições</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Eleição DATA-A</h1>
+    </div>
+
+    <h4>
+        Nova eleição
+    </h4>
+
+    <form th:action="@{/eleicao/salvar}" th:method="${eleicao.id} == 0 ? post : put" th:object="${eleicao}">
+        <div class="row">
+            <input id="id" type="hidden" th:field="*{id}"/>
+            <div class="form-group col-md-12">
+                <label for="nome">Nome:</label>
+                <input class="form-control" id="nomeEleicao" type="text" th:field="*{nomeEleicao}"/>
+                <div th:if="${#fields.hasErrors('nomeEleicao')}" th:errors="*{nomeEleicao}"></div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="dataInicio">Inicio:</label>
+                <input class="form-control" id="dataInicio" type="date" th:field="*{dataInicio}" value=""/>
+                <div th:if="${#fields.hasErrors('dataInicio')}" th:errors="*{dataInicio}"></div>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="dataInicio">Fim:</label>
+                <input class="form-control" id="dataFinal" type="date" th:field="*{dataFinal}" value=""/>
+                <div th:if="${#fields.hasErrors('dataFinal')}" th:errors="*{dataFinal}"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Salvar</button>
+        </div>
+
+    </form>
+
+    <hr/>
+
+    <a class="btn btn-light" th:href="@{/eleicao/listar}">Voltar</a>
+
+    <hr/>
+    <footer class="footer">
+        <p>&copy; 2019 Allan Christian Vieira</p>
+    </footer>
+
+</div>
+</body>
+</html>

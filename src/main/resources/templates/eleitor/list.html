@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Spotmusic</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+        <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Projeto Eleição DATA A</h1>
+            </div>
+
+            <div>
+                <a class="btn btn-primary" th:href="@{/eleicao/{eleicaoId}/eleitors/cadastro(eleicaoId=${eleicaoId})}">Novo eleitor</a>
+            </div>
+            <hr/>
+
+            <div th:if="${eleitors != null}">
+                <h4>
+                    Eleitores Cadastrados
+                </h4>
+
+                <div th:if="${mensagem != null}">
+                    <div class="alert alert-info" role="alert">
+                        <span th:text="${mensagem}">mensagem</span>
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome Eleitor</th>
+                            <th>CPF</th>
+                        </tr>
+                    </thead>
+                    <tr th:each="eleitor: ${eleitors}">
+                        <td th:text="${eleitor.nomeEleitor}">nome</td>
+                        <td th:text="${eleitor.cpfEleitor}">cpf</td>
+                        <td><a class="btn btn-sm btn-info" th:href="@{/eleicao/{eleicaoId}/eleitor/{eleitorId}/votacao/listar(eleicaoId=${eleicaoId}, eleitorId=${eleitor.id})}">Area do eleitor</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div th:if="${#lists.isEmpty(eleitors)}">
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    0 eleitores cadastrados!
+                </div>
+            </div>
+            <hr/>
+            <a class="btn btn-light" href="/eleicao/listar">Voltar</a>
+            <hr/>
+
+            <footer class="footer">
+                <p>&copy; 2019 Allan Christian Vieira</p>
+            </footer>
+
+        </div>
+    </body>
+</html>

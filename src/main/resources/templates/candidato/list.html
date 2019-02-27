@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Projeto Eleições</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+        <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Projeto Eleição DATA A</h1>
+            </div>
+
+            <div>
+                <a class="btn btn-primary" th:href="@{/eleicao/{eleicaoId}/candidatos/cadastro(eleicaoId=${eleicaoId})}">Novo candidato</a>
+            </div>
+            <hr/>
+
+            <div th:if="${candidatos != null}">
+                <h4>
+                    Candidatos Cadastrados
+                </h4>
+
+                <div th:if="${mensagem != null}">
+                    <div class="alert alert-info" role="alert">
+                        <span th:text="${mensagem}">mensagem</span>
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Nome Candidato</th>
+                            <th>Cargo</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tr th:each="candidato: ${candidatos}">
+
+                        <td th:each="image: ${page.content}"><img th:src="'/css/images/' + ${image.name}" class="thumbnail"/></td>
+                        <td th:text="${candidato.nomeCandidato}">nome</td>
+                        <td th:text="${candidato.cargoId.nomeCargo}">cargo</td>
+                        <td>
+                            <a class="btn btn-sm btn-info" th:href="@{/eleicao/{eleicaoId}/candidatos/{candidatoId}/atualizar(eleicaoId=${eleicaoId},  candidatoId=${candidato.id})}">Editar</a>
+                            <a class="btn btn-sm btn-danger" th:href="@{/eleicao/{eleicaoId}/candidatos/{candidatoId}/remover(eleicaoId=${eleicaoId},  candidatoId=${candidato.id})}">Excluir</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <hr/>
+            <a class="btn btn-light" href="/eleicao/listar">Voltar</a>
+            <hr/>
+
+            <footer class="footer">
+                <p>&copy; 2019 Allan Christian Vieira</p>
+            </footer>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Projeto Eleições</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+        <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Projeto Eleição DATA A</h1>
+                <h5>Resultado</h5>
+            </div>
+            <hr/>
+            <div th:if="${resultado != null}">
+                <div th:if="${mensagem != null}">
+                    <div class="alert alert-info" role="alert">
+                        <span th:text="${mensagem}">mensagem</span>
+                    </div>
+                </div>
+                <table  class="table">
+                    <div th:each="resultado: ${rsultados}">
+                        <thead>
+                            <tr>
+                                <th>Votos parcial</th>
+                                <th>Candidato</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td th:text="${resultados}">resultado</td>
+                            <td th:text="${resultado.candidato.nomeCandidato}">resultado</td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
+            <div th:if="${#lists.isEmpty(eleicoes)}">
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    0 resultados!
+                </div>
+            </div>
+            <hr/>
+
+            <a class="btn btn-light" href="/eleicao/{eleicaoId}/eleitors/listar">Voltar</a>
+            <hr/>
+
+            <footer class="footer">
+                <p>&copy; 2019 Allan Christian Vieira</p>
+            </footer>
+
+        </div>
+    </body>
+</html>

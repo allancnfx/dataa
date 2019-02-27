@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Projeto Eleições</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+        <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Projeto Eleição DATA A</h1>
+            </div>
+            <hr/>
+            <div th:if="${eleicoes != null}">
+                <div th:if="${mensagem != null}">
+                    <div class="alert alert-info" role="alert">
+                        <span th:text="${mensagem}">mensagem</span>
+                    </div>
+                </div>
+                <form th:action="@{/votacao/salvar}" th:method="post" th:object="${votacao}">
+                    <table  class="table">
+                        <div th:each="cargo: ${cargos}">
+                            <thead>
+                                <tr>
+                                    <th>Nome Candidato</th>
+                                    <th>Cargo</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tr th:each="candidato: ${candidatos}" th:if="${candidato.cargoId.id} == ${cargo.id}">
+                                <td th:text="${candidato.nomeCandidato}">candidato</td>
+                                <td th:text="${cargo.nomeCargo}">nomeCargo</td>
+                                <td><input type="radio" th:name="${'candidato[' + cargo.id + ']'}" th:value="${candidato.id}" /></td>
+                            </tr>
+                        </div>
+                    </table>
+                    <button class="btn btn-primary" type="submit">Votar</button>
+                </form>
+            </div>
+            <div th:if="${#lists.isEmpty(eleicoes)}">
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    0 candidatos registrados!
+                </div>
+            </div>
+            <hr/>
+
+            <a class="btn btn-light" th:href="@{/eleicao/{id}/eleitors/listar(id=${eleicaoId})}">Voltar</a>
+            <hr/>
+
+            <footer class="footer">
+                <p>&copy; 2019 Allan Christian Vieira</p>
+            </footer>
+
+        </div>
+    </body>
+</html>

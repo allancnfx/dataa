@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Projeto Eleições</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+        <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Projeto Eleição DATA A</h1>
+            </div>
+            <div>
+                <a class="btn btn-primary" th:href="@{/eleicao/{eleicaoId}/images/cadastro(eleicaoId=${eleicaoId})}">Novo candidato</a>
+            </div>
+            <hr/>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nome Candidato</th>
+                    </tr>
+                </thead>
+                <tr th:each="image: ${page.content}">
+                    <td th:text="${image.id}">id</td>
+                    <td th:text="${image.name}">id</td>
+                    <td><img th:src="'/css/images/' + ${image.name}" class="thumbnail"/></td>
+                </tr>
+            </table>
+
+            <div th:if="${#lists.isEmpty(image)}">
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    0 candidatos cadastrados!
+                </div>
+            </div>
+            <hr/>
+            <a class="btn btn-light" href="/home">Voltar</a>
+            <hr/>
+
+            <footer class="footer">
+                <p>&copy; 2019 Allan Christian Vieira</p>
+            </footer>
+
+        </div>
+         <script th:inline="javascript">
+        /*<![CDATA[*/
+        (function() {
+            window.require(['webjars/stompjs/2.3.3/lib/stomp', 'webjars/sockjs-client/1.1.0/dist/sockjs'], function(stomp, SockJS) {
+
+                var redrawCurrentPage = function(message) {
+                    console.log(message);
+                    window.location = /*[[@{/(size=${page.size},page=${page.number})}]]*/'';
+                };
+
+                var socket = SockJS('/imageMessages');
+                var stompClient = Stomp.over(socket);
+                stompClient.connect({/* optional headers */}, function(frame) {
+                    stompClient.subscribe('/topic/newImage', redrawCurrentPage);
+                    stompClient.subscribe('/topic/deleteImage', redrawCurrentPage);
+                });
+            })
+
+        })();
+        /*]]>*/
+    </script>
+        
+    </body>
+</html>

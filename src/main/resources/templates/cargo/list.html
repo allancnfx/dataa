@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Spotmusic</title>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+        <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/css/style.css" rel="stylesheet"/>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Projeto Eleição DATA A</h1>
+            </div>
+
+            <div>
+                <a class="btn btn-primary" th:href="@{/eleicao/{eleicaoId}/cargos/cadastro(eleicaoId=${eleicaoId})}">Novo cargo</a>
+            </div>
+            <hr/>
+
+            <div th:if="${cargos != null}">
+                <h4>
+                    Cargos Cadastrados
+                </h4>
+
+                <div th:if="${mensagem != null}">
+                    <div class="alert alert-info" role="alert">
+                        <span th:text="${mensagem}">mensagem</span>
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome Cargo</th>
+                            <th>Count</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tr th:each="cargo: ${cargos}">
+                        <td><a th:text="${cargo.nomeCargo}" th:href="@{/candidato/{id}/cargos/listar(id=${cargo.id})}">nome</a></td>
+                        <td th:text="${cargo}"></td>
+                        <td>
+                            <a class="btn btn-sm btn-info" th:href="@{/eleicao/{eleicaoId}/cargos/{cargoId}/atualizar(eleicaoId=${eleicaoId}, cargoId=${cargo.id})}">Editar</a>
+                            <a class="btn btn-sm btn-danger" th:href="@{/eleicao/{eleicaoId}/cargos/{cargoId}/remover(eleicaoId=${eleicaoId}, cargoId=${cargo.id})}">Excluir</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div th:if="${#lists.isEmpty(cargos)}">
+                <div class="alert alert-info" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    0 eleições cadastradas!
+                </div>
+            </div>
+            <hr/>
+            <a class="btn btn-light" href="/eleicao/listar">Voltar</a>
+            <hr/>
+
+            <footer class="footer">
+                <p>&copy; 2019 Allan Christian Vieira</p>
+            </footer>
+
+        </div>
+    </body>
+</html>
