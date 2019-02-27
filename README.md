@@ -6,7 +6,7 @@ Projeto de uma aplicação de Eleicões para empresas e entidades de previdênci
 Configurando o projeto e banco de dados.
 ----------------------------------------
 
-O banco de dados esta configurado para `MySql Server`, mas como se trata de uma aplicação com `Hibernate`, você pode configura-lo para trabalhar com qualquer outro banco de dados, basta acessar o arquivo `application.yml` dentro de "src\main\resources\paconte default\application.yml.  
+O banco de dados esta configurado para `MySql Server`, mas como se trata de uma aplicação com `Spring`, você pode configura-lo para trabalhar com qualquer outro banco de dados, basta acessar o arquivo `application.yml` dentro de "src\main\resources\paconte default\application.yml.  
 
 Os passos básicos são:
 
