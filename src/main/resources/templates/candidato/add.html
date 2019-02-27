@@ -30,6 +30,7 @@
                         <div th:if="${#fields.hasErrors('nomeCandidato')}" th:errors="*{nomeCandidato}"></div>
                         <label for="nome">Cargo:</label>
                         <select class="form-control" name="cargoId" th:field="*{cargoId}">
+                            <option value="0">Selecione um cargo</option>
                             <option class="form-control" th:each="cargo : ${cargos}" 
                                     value=""
                                     th:value="${cargo.id}" 

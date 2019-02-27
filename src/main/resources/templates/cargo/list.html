@@ -40,7 +40,7 @@
                         </tr>
                     </thead>
                     <tr th:each="cargo: ${cargos}">
-                        <td><a th:text="${cargo.nomeCargo}" th:href="@{/candidato/{id}/cargos/listar(id=${cargo.id})}">nome</a></td>
+                        <td><a th:text="${cargo.nomeCargo}" th:href="@{/eleicao/{eleicaoId}/cargos/{cargoId}/atualizar(eleicaoId=${eleicaoId}, cargoId=${cargo.id})}">nome</a></td>
                         <td>
                             <a class="btn btn-sm btn-info" th:href="@{/eleicao/{eleicaoId}/cargos/{cargoId}/atualizar(eleicaoId=${eleicaoId}, cargoId=${cargo.id})}">Editar</a>
                             <a class="btn btn-sm btn-danger" th:href="@{/eleicao/{eleicaoId}/cargos/{cargoId}/remover(eleicaoId=${eleicaoId}, cargoId=${cargo.id})}">Excluir</a>
