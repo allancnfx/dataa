@@ -19,4 +19,5 @@ Os passos básicos são:
 9. Cadastre os candidatos relacionados;
 10. Cadastre os Eleitores;
 11. Acesse no painel dentro de eleitores no botão `Area de eleitor`;
-12. Escolha os candidatos concorrentes as vagas e clique votar;
+12. Nesta area do eleitor será apresentado todos os cadidatos separados por cargos e um radio buttom para selecionar o canditado para cada cargo.
+13. Aplicação em desenvolvimento para a area do eleitor e area de resultados da votação.
