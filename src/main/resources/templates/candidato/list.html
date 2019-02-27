@@ -41,10 +41,9 @@
                         </tr>
                     </thead>
                     <tr th:each="candidato: ${candidatos}">
-
-                        <td th:text="${candidato.nomeCandidato}">nome</td>
+                        <td><a th:text="${candidato.nomeCandidato}" th:href="@{/eleicao/{eleicaoId}/candidatos/{candidatoId}/atualizar(eleicaoId=${eleicaoId},  candidatoId=${candidato.id})}">nome</a></td>
                     <div th:if="${candidato.cargoId != null}">
-                        <td   th:text="${candidato.cargoId.nomeCargo}">cargo</td>
+                        <td><a   th:text="${candidato.cargoId.nomeCargo}" th:href="@{/eleicao/{id}/cargos/listar(id=${eleicaoId})}">cargo</a></td>
                     </div>
                     <div th:if="${candidato.cargoId == null}">
                         <td value="">Sem cargo</td>

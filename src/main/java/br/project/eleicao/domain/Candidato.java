@@ -58,7 +58,7 @@ public class Candidato {
 
     @OneToOne
     @JoinColumn(name = "id_cargo_fk", nullable = false)
-    @NotNull
+    @NotNull(message = "*Selecione um cargo")
     private Cargo cargoId;
 
     @OneToOne
