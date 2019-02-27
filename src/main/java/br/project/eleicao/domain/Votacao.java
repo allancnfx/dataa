@@ -1,12 +1,35 @@
 package br.project.eleicao.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+/**
+ *
+ * @author Allan
+ *
+ * Classe de dominio
+ *
+ * @Id informa que o atributo sera um indificador unico
+ *
+ * @@GeneratedValue(strategy = GenerationType.IDENTITY) informa que o atributo
+ * no banco de dados sera um auto incremento
+ *
+ * @Column(nullable = false, length = ?) coluna não nulla e tamanho definido
+ * caracteres
+ *
+ * @OneToOne relacionamento do tipo 1:1
+ *
+ * @OneToMany Com o parâmetro mappedBy informamos o nome do atributo na outra
+ * ponta CascadeType.ALL operações executadas sobre uma entidade serão
+ * propagadas sobre a entidade relacionada.
+ *
+ * @Entity e @Table(name = “votacao”) Informa que a classe representa uma
+ * entidade e que no banco de dados ela deve ser mapeada a uma tabela de nome
+ * votacao.
+ */
 @Entity
 @Table(name = "votacao")
 public class Votacao implements Serializable {
@@ -27,13 +50,6 @@ public class Votacao implements Serializable {
     @JoinColumn(name = "id_candidato_fk")
     private Candidato candidato;
 
-
-
-    @NotBlank
-    @Size(min = 20, max = 20)
-    @Column(nullable = false, length = 20, unique = true)
-    private String protocolo;
-
     public long getId() {
         return id;
     }
@@ -50,44 +66,18 @@ public class Votacao implements Serializable {
         this.eleicao = eleicao;
     }
 
-    /**
-     * @return the protocolo
-     */
-    public String getProtocolo() {
-        return protocolo;
-    }
-
-    /**
-     * @param protocolo the protocolo to set
-     */
-    public void setProtocolo(String protocolo) {
-        this.protocolo = protocolo;
-    }
-
-    /**
-     * @return the eleitor
-     */
     public Eleitor getEleitor() {
         return eleitor;
     }
 
-    /**
-     * @param eleitor the eleitor to set
-     */
     public void setEleitor(Eleitor eleitor) {
         this.eleitor = eleitor;
     }
 
-    /**
-     * @return the candidato
-     */
     public Candidato getCandidato() {
         return candidato;
     }
 
-    /**
-     * @param candidato the candidato to set
-     */
     public void setCandidato(Candidato candidato) {
         this.candidato = candidato;
     }

@@ -6,15 +6,34 @@
 package br.project.eleicao.dao.impl;
 
 import br.project.eleicao.dao.VotacaoDAO;
-import br.project.eleicao.domain.Cargo;
-import br.project.eleicao.domain.Eleicao;
 import br.project.eleicao.domain.Votacao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+/**
+ *
+ * @author Allan
+ *
+ * @Repository informa ao framework que esta classe se trata de um repositório,
+ * componente responsável pelo acesso a dados em um banco de dados.
+ *
+ * @PersistenceContext. define para o container do Spring a responsabilidade de
+ * gerenciar a dependência de um entity manager.
+ *
+ * método salvar(). Esse método recebe um objeto e, utilizando o objeto `em`,
+ * chamamos o método persist().
+ *
+ * método recuperarPorEleicaoId(). execulta select para retornar todos os dados
+ * cadastrados relacionado à eleição;
+ *
+ * método atualizar(). Chamamos o merge() do entity manager (em) para atualizar
+ * os dados;
+ *
+ * Código do método remover(). Apenas o chamamos, passando como parâmetro uma
+ * referência da do objeto que deve ser excluído.
+ */
 @Repository
 public class VotacaoDaoImpl implements VotacaoDAO {
 
@@ -39,7 +58,5 @@ public class VotacaoDaoImpl implements VotacaoDAO {
                 .setParameter("eleicaoId", eleicaoId)
                 .getResultList().size();
     }
-
-
 
 }

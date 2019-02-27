@@ -35,7 +35,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Foto</th>
                             <th>Nome Candidato</th>
                             <th>Cargo</th>
                             <th>Ação</th>
@@ -43,13 +42,17 @@
                     </thead>
                     <tr th:each="candidato: ${candidatos}">
 
-                        <td th:each="image: ${page.content}"><img th:src="'/css/images/' + ${image.name}" class="thumbnail"/></td>
                         <td th:text="${candidato.nomeCandidato}">nome</td>
-                        <td th:text="${candidato.cargoId.nomeCargo}">cargo</td>
-                        <td>
-                            <a class="btn btn-sm btn-info" th:href="@{/eleicao/{eleicaoId}/candidatos/{candidatoId}/atualizar(eleicaoId=${eleicaoId},  candidatoId=${candidato.id})}">Editar</a>
-                            <a class="btn btn-sm btn-danger" th:href="@{/eleicao/{eleicaoId}/candidatos/{candidatoId}/remover(eleicaoId=${eleicaoId},  candidatoId=${candidato.id})}">Excluir</a>
-                        </td>
+                    <div th:if="${candidato.cargoId != null}">
+                        <td   th:text="${candidato.cargoId.nomeCargo}">cargo</td>
+                    </div>
+                    <div th:if="${candidato.cargoId == null}">
+                        <td value="">Sem cargo</td>
+                    </div>
+                    <td>
+                        <a class="btn btn-sm btn-info" th:href="@{/eleicao/{eleicaoId}/candidatos/{candidatoId}/atualizar(eleicaoId=${eleicaoId},  candidatoId=${candidato.id})}">Editar</a>
+                        <a class="btn btn-sm btn-danger" th:href="@{/eleicao/{eleicaoId}/candidatos/{candidatoId}/remover(eleicaoId=${eleicaoId},  candidatoId=${candidato.id})}">Excluir</a>
+                    </td>
                     </tr>
                 </table>
             </div>

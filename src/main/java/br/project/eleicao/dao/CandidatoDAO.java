@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.project.eleicao.dao;
 
 import br.project.eleicao.domain.Candidato;
@@ -11,6 +6,12 @@ import java.util.List;
 /**
  *
  * @author Allan
+ *
+ * Classe que provê uma interface que abstrai o acesso a dados; lê e grava a
+ * partir da origem de dados (banco de dados) e encapsula o acesso aos dados.
+ * 
+ * Ex: recuperarPorEleicaoId(long eleicaoId); -> recupera todos candidatos relacionados à eleição cadastrado em uma lista.
+ * 
  */
 public interface CandidatoDAO {
 

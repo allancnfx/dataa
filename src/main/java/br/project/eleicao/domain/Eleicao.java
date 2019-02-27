@@ -9,6 +9,40 @@ import javax.validation.constraints.Size;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ *
+ * @author Allan
+ *
+ * Classe de dominio
+ *
+ * @Id informa que o atributo sera um indificador unico
+ *
+ * @@GeneratedValue(strategy = GenerationType.IDENTITY) informa que o atributo
+ * no banco de dados sera um auto incremento
+ *
+ * @NotBlank anotação de validação
+ *
+ * @Size(min = ?, max = ?) define o tamanho minimo e maximo do campo
+ *
+ * @Column(nullable = false, length = ?) coluna não nulla e tamanho definido
+ * caracteres
+ *
+ * @OneToOne relacionamento do tipo 1:1
+ *
+ * @OneToMany Com o parâmetro mappedBy informamos o nome do atributo na outra
+ * ponta CascadeType.ALL operações executadas sobre uma entidade serão
+ * propagadas sobre a entidade relacionada.
+ *
+ * @NotNull campo não pode ser nullo
+ * @DateTimeFormat recebe valor formatado
+ *
+ * @Temporal anotação para campos persistentes ou propriedades do tipo
+ * java.util.Date e java.util.Calendar.
+ *
+ * @Entity e @Table(name = “eleicao”) Informa que a classe representa uma
+ * entidade e que no banco de dados ela deve ser mapeada a uma tabela de nome
+ * eleicao.
+ */
 @Entity
 @Table(name = "eleicao")
 public class Eleicao {
@@ -42,12 +76,10 @@ public class Eleicao {
 
     @OneToMany(mappedBy = "eleicao", cascade = CascadeType.ALL)
     private List<Eleitor> eleitor;
-    
-    @OneToMany(mappedBy = "eleicao", cascade = CascadeType.ALL)
-    private List<Image> image;
 
-
-
+    /**
+     * Metodos getters e setters
+     */
     public String getNomeEleicao() {
         return nomeEleicao;
     }
@@ -103,20 +135,4 @@ public class Eleicao {
     public void setEleitor(List<Eleitor> eleitor) {
         this.eleitor = eleitor;
     }
-
-    /**
-     * @return the image
-     */
-    public List<Image> getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(List<Image> image) {
-        this.image = image;
-    }
-
-
 }

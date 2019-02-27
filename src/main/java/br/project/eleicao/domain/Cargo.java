@@ -7,6 +7,34 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+/**
+ *
+ * @author Allan
+ *
+ * Classe de dominio
+ *
+ * @Id informa que o atributo sera um indificador unico
+ *
+ * @@GeneratedValue(strategy = GenerationType.IDENTITY) informa que o atributo
+ * no banco de dados sera um auto incremento
+ *
+ * @NotBlank anotação de validação
+ *
+ * @Size(min = ?, max = ?) define o tamanho minimo e maximo do campo
+ *
+ * @Column(nullable = false, length = ?) coluna não nulla e tamanho definido
+ * caracteres
+ *
+ * @OneToOne relacionamento do tipo 1:1
+ *
+ * @OneToMany Com o parâmetro mappedBy informamos o nome do atributo na outra
+ * ponta CascadeType.ALL operações executadas sobre uma entidade serão
+ * propagadas sobre a entidade relacionada.
+ *
+ * @Entity e @Table(name = “cargo”) Informa que a classe representa uma
+ * entidade e que no banco de dados ela deve ser mapeada a uma tabela de nome
+ * cargo.
+ */
 @Entity
 @Table(name = "cargo")
 public class Cargo implements Serializable {
@@ -19,18 +47,17 @@ public class Cargo implements Serializable {
     @Size(min = 4, max = 60)
     @Column(nullable = false, length = 60)
     private String nomeCargo;
-    
-    
+
     @OneToMany(mappedBy = "cargoId", cascade = CascadeType.ALL)
     private List<Candidato> candidato;
 
-   
     @ManyToOne
     @JoinColumn(name = "id_eleicao_fk")
     private Eleicao eleicao;
 
-   
-
+    /**
+     * Metodos getters e setters
+     */
     public long getId() {
         return id;
     }
@@ -55,16 +82,10 @@ public class Cargo implements Serializable {
         this.eleicao = eleicao;
     }
 
-    /**
-     * @return the candidato
-     */
     public Collection<Candidato> getCandidato() {
         return candidato;
     }
 
-    /**
-     * @param candidato the candidato to set
-     */
     public void setCandidato(List<Candidato> candidato) {
         this.candidato = candidato;
     }

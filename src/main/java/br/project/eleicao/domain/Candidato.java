@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.project.eleicao.domain;
 
 import java.util.List;
@@ -15,14 +10,40 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
  * @author Allan
+ *
+ * Classe de dominio
+ *
+ * @Id informa que o atributo sera um indificador unico
+ *
+ * @@GeneratedValue(strategy = GenerationType.IDENTITY) informa que o atributo
+ * no banco de dados sera um auto incremento
+ *
+ * @NotBlank anotação de validação
+ *
+ * @Size(min = ?, max = ?) define o tamanho minimo e maximo do campo
+ *
+ * @Column(nullable = false, length = ?) coluna não nulla e tamanho definido
+ * caracteres
+ *
+ * @OneToOne relacionamento do tipo 1:1
+ *
+ * @OneToMany Com o parâmetro mappedBy informamos o nome do atributo na outra
+ * ponta CascadeType.ALL operações executadas sobre uma entidade serão
+ * propagadas sobre a entidade relacionada.
+ *
+ * @Entity e @Table(name = “candidato”) Informa que a classe representa uma
+ * entidade e que no banco de dados ela deve ser mapeada a uma tabela de nome
+ * candidato.
  */
 @Entity
+@Table(name = "candidato")
 public class Candidato {
 
     @Id
@@ -35,7 +56,7 @@ public class Candidato {
     private String nomeCandidato;
 
     @OneToOne
-    @JoinColumn(name = "id_cargo_fk")
+    @JoinColumn(name = "id_cargo_fk", nullable = false)
     private Cargo cargoId;
 
     @OneToOne
@@ -45,91 +66,47 @@ public class Candidato {
     @OneToMany(mappedBy = "candidato", cascade = CascadeType.ALL)
     private List<Votacao> votacao;
 
-    @OneToMany(mappedBy = "candidato", cascade = CascadeType.ALL)
-    private List<Image> image;
-
     /**
-     * @return the id
+     * Metodos getters e setters
      */
     public long getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(long id) {
         this.id = id;
     }
 
-    /**
-     * @return the nomeCandidato
-     */
     public String getNomeCandidato() {
         return nomeCandidato;
     }
 
-    /**
-     * @param nomeCandidato the nomeCandidato to set
-     */
     public void setNomeCandidato(String nomeCandidato) {
         this.nomeCandidato = nomeCandidato;
     }
 
-    /**
-     * @return the cargoId
-     */
     public Cargo getCargoId() {
         return cargoId;
     }
 
-    /**
-     * @param cargoId the cargoId to set
-     */
     public void setCargoId(Cargo cargoId) {
         this.cargoId = cargoId;
     }
 
-    /**
-     * @return the eleicao
-     */
     public Eleicao getEleicao() {
         return eleicao;
     }
 
-    /**
-     * @param eleicao the eleicao to set
-     */
     public void setEleicao(Eleicao eleicao) {
         this.eleicao = eleicao;
     }
 
-    /**
-     * @return the votacao
-     */
     public List<Votacao> getVotacao() {
         return votacao;
     }
 
-    /**
-     * @param votacao the votacao to set
-     */
     public void setVotacao(List<Votacao> votacao) {
         this.votacao = votacao;
-    }
-
-    /**
-     * @return the image
-     */
-    public List<Image> getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(List<Image> image) {
-        this.image = image;
     }
 
 }

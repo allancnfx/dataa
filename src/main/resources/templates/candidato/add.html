@@ -29,11 +29,11 @@
                         <input class="form-control" id="nomeCandidato" type="text" th:field="*{nomeCandidato}"/>
                         <div th:if="${#fields.hasErrors('nomeCandidato')}" th:errors="*{nomeCandidato}"></div>
                         <label for="nome">Cargo:</label>
-                        <select class="form-control" th:field="*{cargoId}">
-                            <option th:value="0" ></option>
+                        <select class="form-control" name="cargoId" th:field="*{cargoId}">
                             <option class="form-control" th:each="cargo : ${cargos}" 
+                                    value=""
                                     th:value="${cargo.id}" 
-                                    th:text="${cargo.nomeCargo}"></option>
+                                    th:text="${cargo.nomeCargo}" ></option>
                         </select>
                         <div th:if="${#fields.hasErrors('cargoId')}" th:errors="*{cargoId}"></div>
                         <div th:if="${mensagem != null}">

@@ -40,7 +40,6 @@
                             <th>Fim</th>
                             <th>Ação</th>
                             <th>Registros</th>
-                            <th>Resultados</th>
                         </tr>
                     </thead>
                     <tr th:each="eleicao: ${eleicoes}">
@@ -55,11 +54,6 @@
                             <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/cargos/listar(id=${eleicao.id})}">Cargos</a>
                             <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/candidatos/listar(id=${eleicao.id})}">Candidatos</a>
                             <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/eleitors/listar(id=${eleicao.id})}">Eleitor</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/resultado/listar(id=${eleicao.id})}">Parcial</a>
-                            <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/images/listar(id=${eleicao.id})}">Imagens</a>
-
                         </td>
                     </tr>
                 </table>
