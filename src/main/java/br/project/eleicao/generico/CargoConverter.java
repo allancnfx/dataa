@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.project.eleicao.generico;
 
 import br.project.eleicao.dao.CargoDAO;
@@ -12,8 +7,13 @@ import java.beans.PropertyEditorSupport;
 /**
  *
  * @author Allan
+ *
+ * Classe que converte o valor String do select combobox da view cadastro
+ * candidato em Objeto do tipo Cargo.
+ * 
  */
 public class CargoConverter extends PropertyEditorSupport {
+
     private final CargoDAO cargoDAO;
 
     public CargoConverter(CargoDAO cargoDAO) {
