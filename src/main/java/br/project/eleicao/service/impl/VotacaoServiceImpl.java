@@ -46,9 +46,14 @@ public class VotacaoServiceImpl implements VotacaoService {
     @Autowired
     private EleitorService eleitorService;
 
+
+
     @Override
-    public void salvar(Votacao votacao, long eleicaoId, long eleitorId) {
+    public void salvar(Votacao votacao, long eleicaoId, long eleitorId, String protocolo) {
+
         votacao.setEleicao(eleicaoService.recuperarPorId(eleicaoId));
+        votacao.setEleitor(eleitorService.recuperarPorId(eleitorId));
+        votacao.setProtocolo(protocolo);
         votacaoDAO.salvar(votacao);
     }
 
@@ -58,7 +63,9 @@ public class VotacaoServiceImpl implements VotacaoService {
     }
 
     @Override
-    public int recuperar(long eleicaoId) {
-        return votacaoDAO.recuperar(eleicaoId);
+    public int recuperarPorId(long eleicaoId) {
+        return votacaoDAO.recuperarPorId(eleicaoId);
     }
+
+
 }

@@ -5,18 +5,24 @@
  */
 package br.project.eleicao.controller;
 
+import br.project.eleicao.dao.CandidatoDAO;
+import br.project.eleicao.domain.Candidato;
 import br.project.eleicao.domain.Votacao;
+import br.project.eleicao.generico.CandidatoConverter;
 import br.project.eleicao.service.CandidatoService;
 import br.project.eleicao.service.CargoService;
 import br.project.eleicao.service.EleicaoService;
 import br.project.eleicao.service.EleitorService;
 import br.project.eleicao.service.VotacaoService;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,7 +72,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  *
  */
 @Controller
-@RequestMapping("eleicao/{eleicaoId}/eleitor/{eleitorId}/votacao")
+@RequestMapping("eleicao/{eleicaoId}/eleitor/{eleitorId}/")
 public class VotacaoController {
 
     @Autowired
@@ -84,19 +90,63 @@ public class VotacaoController {
     @Autowired
     private EleicaoService eleicaoService;
 
+    @Autowired
+    private CandidatoDAO candidatoDAO;
+
+    @InitBinder
+    public void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
+        binder.registerCustomEditor(Candidato.class, new CandidatoConverter(candidatoDAO));
+    }
+
     /**
-     * em listar passamos seis atributos pelo model, candidato, cargo, eleitor e votacao, eleicao e o id da
-     * eleicao
+     * em listar passamos seis atributos pelo model, candidato, cargo, eleitor e
+     * votacao, eleicao e o id da eleicao
      */
-    @GetMapping("/listar")
-    public ModelAndView modelAndView(@PathVariable("eleicaoId") long eleicaoId, ModelMap model) {
+    private void list(long eleicaoId, long eleitorId, ModelMap model) {
         model.addAttribute("eleicoes", eleicaoService.recuperar());
-        model.addAttribute("cargos", cargoService.recuperarPorEleicaoId(eleicaoId));
         model.addAttribute("candidatos", candidatoService.recuperarPorEleicaoId(eleicaoId));
+        model.addAttribute("cargos", cargoService.recuperarPorEleicaoId(eleicaoId));
         model.addAttribute("eleitors", eleitorService.recuperarPorEleicaoId(eleicaoId));
-        model.addAttribute("votacao", votacaoService.recuperarPorEleicaoId(eleicaoId));
+        model.addAttribute("votacaos", votacaoService.recuperarPorEleicaoId(eleicaoId));
         model.addAttribute("eleicaoId", eleicaoId);
+        model.addAttribute("eleitorId", eleitorId);
+
+    }
+
+    @GetMapping("/listar")
+    public ModelAndView modelAndView(@PathVariable("eleicaoId") long eleicaoId, @PathVariable("eleitorId") long eleitorId, ModelMap model) {
+        list(eleicaoId, eleitorId, model);
         return new ModelAndView("/votacao/list", model);
     }
 
+    @GetMapping("cargo/{cargoId}/votar")
+    public ModelAndView modelAndViewVotar(@PathVariable("eleicaoId") long eleicaoId, @PathVariable("eleitorId") long eleitorId, @PathVariable("cargoId") long cargoId, ModelMap model) {
+        list(eleicaoId, eleitorId, model);
+        model.addAttribute("cargos", cargoService.recuperarPorEleicaoIdECargoId(eleicaoId, cargoId));
+        model.addAttribute("cargoId", cargoId);
+        return new ModelAndView("/votacao/add", model);
+    }
+
+    @PostMapping("cargo/{cargoId}/salvar")
+    public ModelAndView salvar(@PathVariable("eleicaoId") long eleicaoId, @PathVariable("eleitorId") long eleitorId, @PathVariable("cargoId") long cargoId, @Valid @ModelAttribute("votacao") Votacao votacao, BindingResult result, RedirectAttributes attr, HttpServletRequest request, ModelMap model) {
+
+        votacaoService.salvar(votacao, eleicaoId, eleitorId, protocolo());
+        attr.addFlashAttribute("mensagem", "Cargo salva com sucesso.");
+        return new ModelAndView("redirect:/eleicao/" + eleicaoId + "/eleitor/" + eleitorId + "/listar");
+    }
+
+    private String protocolo() {
+        long v1 = numeroProtocolo();
+        long v2 = numeroProtocolo();
+        long v3 = numeroProtocolo();
+        long v4 = numeroProtocolo();
+
+        String protoculo = v1 + "-" + v2 + "-" + v3 + "-" + v4;
+        return protoculo;
+    }
+
+    private long numeroProtocolo() {
+        long valor = (long) (1000 + Math.random() * 9999);
+        return valor;
+    }
 }

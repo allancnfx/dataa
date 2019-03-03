@@ -2,7 +2,7 @@ package br.project.eleicao.controller;
 
 import br.project.eleicao.domain.Eleicao;
 import br.project.eleicao.service.EleicaoService;
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,11 +69,7 @@ public class EleicaoController {
     @Autowired
     private EleicaoService eleicaoService;
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(Date.class,
-                new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
-    }
+
 
     /**
      * em listar apenas recuperamos as eleições cadastradas e adicionamos no

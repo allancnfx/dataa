@@ -22,4 +22,6 @@ public interface EleitorDAO {
 
     List<Eleitor> recuperarPorEleitorId(long eleitorId);
 
+    Eleitor recuperarPorId(long id);
+
 }

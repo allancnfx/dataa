@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Projeto Eleições</title>
+        <title>Spotmusic</title>
 
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, user-scalable=no"/>
@@ -16,39 +16,44 @@
                 <h1>Projeto Eleição DATA A</h1>
             </div>
             <hr/>
-            <div th:if="${eleicoes != null}">
+
+            <div th:if="${cargos != null}">
+                <h4>
+                    Cargos Cadastrados
+                </h4>
+
                 <div th:if="${mensagem != null}">
                     <div class="alert alert-info" role="alert">
                         <span th:text="${mensagem}">mensagem</span>
                     </div>
                 </div>
-                <form th:action="@{/votacao/salvar}" th:method="post" th:object="${votacao}">
-                    <table  class="table">
-                        <div th:each="cargo: ${cargos}">
-                            <thead>
-                                <tr>
-                                    <th>Nome Candidato</th>
-                                    <th>Cargo</th>
-                                    <th>Selecionar</th>
-                                </tr>
-                            </thead>
-                            <tr th:each="candidato: ${candidatos}" th:if="${candidato.cargoId.id} == ${cargo.id}">
-                                <td th:text="${candidato.nomeCandidato}">candidato</td>
-                                <td th:text="${cargo.nomeCargo}">nomeCargo</td>
-                                <td><input type="radio" th:name="${'candidato[' + cargo.id + ']'}" th:value="${candidato.id}" /></td>
-                            </tr>
-                        </div>
-                    </table>
-                </form>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome Cargo</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+
+                    <tr th:each="cargo: ${cargos}">
+
+                        <td th:text="${cargo.nomeCargo}">nome</td>
+                    <div th:if="${votacaos != null}">
+                        <td><a class="btn btn-sm btn-info" th:href="@{/eleicao/{eleicaoId}/eleitor/{eleitorId}/cargo/{cargoId}/votar(eleicaoId=${eleicaoId}, eleitorId=${eleitorId}, cargoId=${cargo.id})}">Votar</a></td>
+                    </div>
+                    </tr>
+
+                </table>
             </div>
-            <div th:if="${#lists.isEmpty(eleicoes)}">
+
+            <div th:if="${#lists.isEmpty(cargos)}">
                 <div class="alert alert-info" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
-                    0 candidatos registrados!
+                    0 eleições cadastradas!
                 </div>
             </div>
             <hr/>
-
             <a class="btn btn-light" th:href="@{/eleicao/{id}/eleitors/listar(id=${eleicaoId})}">Voltar</a>
             <hr/>
 

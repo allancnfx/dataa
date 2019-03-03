@@ -1,6 +1,8 @@
 package br.project.eleicao.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -46,9 +48,14 @@ public class Votacao implements Serializable {
     @JoinColumn(name = "id_eleitor_fk")
     private Eleitor eleitor;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_candidato_fk")
     private Candidato candidato;
+    
+    
+    @NotBlank
+    @Column(nullable = false)
+    private String protocolo;
 
     public long getId() {
         return id;
@@ -74,10 +81,31 @@ public class Votacao implements Serializable {
         this.eleitor = eleitor;
     }
 
+
+    /**
+     * @return the protocolo
+     */
+    public String getProtocolo() {
+        return protocolo;
+    }
+
+    /**
+     * @param protocolo the protocolo to set
+     */
+    public void setProtocolo(String protocolo) {
+        this.protocolo = protocolo;
+    }
+
+    /**
+     * @return the candidato
+     */
     public Candidato getCandidato() {
         return candidato;
     }
 
+    /**
+     * @param candidato the candidato to set
+     */
     public void setCandidato(Candidato candidato) {
         this.candidato = candidato;
     }

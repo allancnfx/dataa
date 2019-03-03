@@ -2,6 +2,7 @@ package br.project.eleicao.dao.impl;
 
 import br.project.eleicao.dao.CandidatoDAO;
 import br.project.eleicao.domain.Candidato;
+import br.project.eleicao.domain.Eleicao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -80,6 +81,11 @@ public class CandidatoDaoImpl implements CandidatoDAO {
     @Override
     public void excluir(long candidatoId) {
         em.remove(em.getReference(Candidato.class, candidatoId));
+    }
+
+    @Override
+    public Candidato recuperarPorId(long id) {
+        return em.find(Candidato.class, id);
     }
 
 }

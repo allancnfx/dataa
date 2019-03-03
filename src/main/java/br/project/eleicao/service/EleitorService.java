@@ -15,5 +15,7 @@ public interface EleitorService {
     List<Eleitor> recuperarPorEleicaoId(long eleicaoId);
 
     List<Eleitor> recuperarPorEleitorId(long eleitorId);
+    
+    Eleitor recuperarPorId(long id);
 
 }

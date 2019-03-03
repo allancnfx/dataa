@@ -9,6 +9,9 @@
 
         <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="/css/style.css" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"/>
+
+
     </head>
     <body>
         <div class="container">
@@ -28,22 +31,26 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="nome">Cpf:</label>
-                        <input class="form-control" id="cpfEleitor" type="text" th:field="*{cpfEleitor}"/>
+                        <input class="form-control cpf" id="cpfEleitor" type="text" th:field="*{cpfEleitor}" data-mask="999.999.999-99" placeholder="000.000.000-00"/>
                         <div th:if="${#fields.hasErrors('cpfEleitor')}" th:errors="*{cpfEleitor}"></div>
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Salvar</button>
-                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Salvar</button>
                 </div>
             </form>
             <hr/>
-            
+
             <a class="btn btn-light" th:href="@{/eleicao/{id}/eleitors/listar(id=${eleicaoId})}">Voltar</a>
-            
+
             <hr/>
             <footer class="footer">
                 <p>&copy; 2019 Allan Christian Vieira</p>
             </footer>
         </div>
+        <script>
+            $('.cpf').mask('000.000.000-00', {reverse: true});
+        </script>
     </body>
+
 </html>

@@ -78,4 +78,9 @@ public class CandidatoServiceImpl implements CandidatoService {
         candidatoDAO.excluir(recuperarPorEleicaoIdECandidatoId(eleicaoId, candidatoId).getId());
     }
 
+    @Override
+    public Candidato recuperarPorId(long id) {
+        return candidatoDAO.recuperarPorId(id);
+    }
+
 }

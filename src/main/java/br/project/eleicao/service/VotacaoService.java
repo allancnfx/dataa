@@ -9,10 +9,10 @@ import java.util.List;
  * nas classes dentro do pacote br.project.eleicao.service.impl
  */
 public interface VotacaoService {
-
-    void salvar(Votacao votacao, long eleicaoId, long eleitorId);
-
+    
+    void salvar(Votacao Votacao, long eleicaoId, long eleitorId, String protocolo);
+    
     List<Votacao> recuperarPorEleicaoId(long eleicaoId);
 
-    int recuperar(long eleicaoId);
+    int recuperarPorId(long id);
 }

@@ -42,7 +42,7 @@
                     <tr th:each="eleitor: ${eleitors}">
                         <td th:text="${eleitor.nomeEleitor}">nome</td>
                         <td th:text="${eleitor.cpfEleitor}">cpf</td>
-                        <td><a class="btn btn-sm btn-info" th:href="@{/eleicao/{eleicaoId}/eleitor/{eleitorId}/votacao/listar(eleicaoId=${eleicaoId}, eleitorId=${eleitor.id})}">Area do eleitor</a></td>
+                        <td><a class="btn btn-sm btn-info" th:href="@{/eleicao/{eleicaoId}/eleitor/{eleitorId}/listar(eleicaoId=${eleicaoId}, eleitorId=${eleitor.id})}">Area do eleitor</a></td>
                     </tr>
                 </table>
             </div>

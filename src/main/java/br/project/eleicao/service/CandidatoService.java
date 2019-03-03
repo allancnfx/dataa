@@ -15,6 +15,8 @@ public interface CandidatoService {
     List<Candidato> recuperarPorEleicaoId(long eleicaoId);
 
     Candidato recuperarPorEleicaoIdECandidatoId(long eleicaoId, long candidatoId);
+    
+    Candidato recuperarPorId(long id);
 
     List<Candidato> recuperarPorEleicaoIdECargoId(long eleicaoId, long cargoId);
 

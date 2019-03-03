@@ -7,9 +7,11 @@ package br.project.eleicao.dao.impl;
 
 import br.project.eleicao.dao.VotacaoDAO;
 import br.project.eleicao.domain.Votacao;
+import java.awt.print.Pageable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -53,10 +55,11 @@ public class VotacaoDaoImpl implements VotacaoDAO {
     }
 
     @Override
-    public int recuperar(long eleicaoId) {
+    public int recuperarPorId(long eleicaoId) {
         return em.createQuery("select count(v) from Votacao v where v.eleicao.id = :eleicaoId", Votacao.class)
                 .setParameter("eleicaoId", eleicaoId)
                 .getResultList().size();
     }
 
+   
 }

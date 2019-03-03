@@ -9,9 +9,10 @@ import java.util.List;
  *
  * Classe que provê uma interface que abstrai o acesso a dados; lê e grava a
  * partir da origem de dados (banco de dados) e encapsula o acesso aos dados.
- * 
- * Ex: recuperarPorEleicaoId(long eleicaoId); -> recupera todos candidatos relacionados à eleição cadastrado em uma lista.
- * 
+ *
+ * Ex: recuperarPorEleicaoId(long eleicaoId); -> recupera todos candidatos
+ * relacionados à eleição cadastrado em uma lista.
+ *
  */
 public interface CandidatoDAO {
 
@@ -20,6 +21,8 @@ public interface CandidatoDAO {
     List<Candidato> recuperarPorEleicaoId(long eleicaoId);
 
     List<Candidato> recuperarPorEleicaoIdECargoId(long eleicaoId, long cargoId);
+
+    Candidato recuperarPorId(long id);
 
     Candidato recuperarPorEleicaoIdECandidatoId(long eleicaoId, long candidatoId);
 

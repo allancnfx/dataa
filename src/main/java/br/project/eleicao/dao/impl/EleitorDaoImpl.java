@@ -54,4 +54,9 @@ public class EleitorDaoImpl implements EleitorDAO {
                 .setParameter("eleitor", eleitorId)
                 .getResultList();
     }
+
+    @Override
+    public Eleitor recuperarPorId(long id) {
+        return em.find(Eleitor.class, id);
+    }
 }

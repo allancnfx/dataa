@@ -56,4 +56,9 @@ public class EleitorServiceImpl implements EleitorService {
 
     }
 
+    @Override
+    public Eleitor recuperarPorId(long id) {
+         return eleitorDAO.recuperarPorId(id);
+    }
+
 }
