@@ -128,7 +128,7 @@ public class CandidatoController {
         }
 
         candidatoService.salvar(candidato, eleicaoId);
-        attr.addFlashAttribute("mensagem", "Candidato salva com sucesso.");
+        attr.addFlashAttribute("mensagem", "Candidato salvo com sucesso.");
         return new ModelAndView("redirect:/eleicao/" + eleicaoId + "/candidatos/listar");
 
     }

@@ -32,9 +32,8 @@ import javax.validation.constraints.Size;
  * ponta CascadeType.ALL operações executadas sobre uma entidade serão
  * propagadas sobre a entidade relacionada.
  *
- * @Entity e @Table(name = “cargo”) Informa que a classe representa uma
- * entidade e que no banco de dados ela deve ser mapeada a uma tabela de nome
- * cargo.
+ * @Entity e @Table(name = “cargo”) Informa que a classe representa uma entidade
+ * e que no banco de dados ela deve ser mapeada a uma tabela de nome cargo.
  */
 @Entity
 @Table(name = "cargo")
@@ -51,6 +50,9 @@ public class Cargo implements Serializable {
 
     @OneToMany(mappedBy = "cargoId", cascade = CascadeType.ALL)
     private List<Candidato> candidato;
+
+    @OneToMany(mappedBy = "cargo", cascade = CascadeType.ALL)
+    private List<Votacao> votacao;
 
     @ManyToOne
     @JoinColumn(name = "id_eleicao_fk")
@@ -89,6 +91,20 @@ public class Cargo implements Serializable {
 
     public void setCandidato(List<Candidato> candidato) {
         this.candidato = candidato;
+    }
+
+    /**
+     * @return the votacao
+     */
+    public List<Votacao> getVotacao() {
+        return votacao;
+    }
+
+    /**
+     * @param votacao the votacao to set
+     */
+    public void setVotacao(List<Votacao> votacao) {
+        this.votacao = votacao;
     }
 
 }

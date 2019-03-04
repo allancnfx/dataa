@@ -100,7 +100,7 @@ public class EleitorController {
             return "/eleitor/add";
         }
         eleitorService.salvar(eleitor, eleicaoId);
-        attr.addFlashAttribute("mensagem", "Cargo salva com sucesso.");
+        attr.addFlashAttribute("mensagem", "Eleitor registrado com sucesso.");
         return "redirect:/eleicao/" + eleicaoId + "/eleitors/listar";
     }
 }

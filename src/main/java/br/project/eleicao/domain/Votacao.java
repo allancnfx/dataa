@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -50,7 +51,12 @@ public class Votacao implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_candidato_fk")
-    private Candidato candidato;
+    @NotNull(message = "*Selecione um candidato")
+    private Candidato candidatoId;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_cargo_fk")
+    private Cargo cargo;
     
     
     @NotBlank
@@ -97,17 +103,31 @@ public class Votacao implements Serializable {
     }
 
     /**
-     * @return the candidato
+     * @return the candidatoId
      */
-    public Candidato getCandidato() {
-        return candidato;
+    public Candidato getCandidatoId() {
+        return candidatoId;
     }
 
     /**
-     * @param candidato the candidato to set
+     * @param candidatoId the candidatoId to set
      */
-    public void setCandidato(Candidato candidato) {
-        this.candidato = candidato;
+    public void setCandidatoId(Candidato candidatoId) {
+        this.candidatoId = candidatoId;
+    }
+
+    /**
+     * @return the cargo
+     */
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    /**
+     * @param cargo the cargo to set
+     */
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
 }

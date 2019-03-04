@@ -7,6 +7,7 @@ package br.project.eleicao.service.impl;
 
 import br.project.eleicao.dao.VotacaoDAO;
 import br.project.eleicao.domain.Votacao;
+import br.project.eleicao.service.CargoService;
 import br.project.eleicao.service.EleicaoService;
 import br.project.eleicao.service.EleitorService;
 import br.project.eleicao.service.VotacaoService;
@@ -46,26 +47,42 @@ public class VotacaoServiceImpl implements VotacaoService {
     @Autowired
     private EleitorService eleitorService;
 
-
+    @Autowired
+    private CargoService cargoService;
 
     @Override
-    public void salvar(Votacao votacao, long eleicaoId, long eleitorId, String protocolo) {
+    public void salvar(Votacao votacao, long eleicaoId, long eleitorId, long cargoId, String protocolo) {
 
         votacao.setEleicao(eleicaoService.recuperarPorId(eleicaoId));
         votacao.setEleitor(eleitorService.recuperarPorId(eleitorId));
+        votacao.setCargo(cargoService.recuperarPorId(cargoId));
         votacao.setProtocolo(protocolo);
         votacaoDAO.salvar(votacao);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Votacao> recuperarPorEleicaoId(long eleicaoId) {
         return votacaoDAO.recuperarPorEleicaoId(eleicaoId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public int recuperarPorId(long eleicaoId) {
         return votacaoDAO.recuperarPorId(eleicaoId);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Votacao recuperarPorEleicaoIdEleitorIdCargoId(long eleicaoId, long eleitorId, long cargoId) {
+        return votacaoDAO.recuperarPorEleicaoIdEleitorIdCargoId(eleicaoId, eleitorId, cargoId);
+    }
+    
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<Votacao> recuperarPorEleicaoIdEleitorIdCargoIdTeste(long eleicaoId, long eleitorId) {
+        return votacaoDAO.recuperarPorEleicaoIdEleitorIdCargoIdTeste(eleicaoId, eleitorId);
+    }
 
 }

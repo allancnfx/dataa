@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -68,8 +69,6 @@ public class EleicaoController {
 
     @Autowired
     private EleicaoService eleicaoService;
-
-
 
     /**
      * em listar apenas recuperamos as eleições cadastradas e adicionamos no
@@ -136,7 +135,8 @@ public class EleicaoController {
 
     /**
      * semelhante ao outros metodos, aqui é informado o id da eleicao e chamamos
-     * o metodo excluir passando esse parametros, fazendo assum a exclusão dos dados.
+     * o metodo excluir passando esse parametros, fazendo assum a exclusão dos
+     * dados.
      */
     @GetMapping("/{id}/remover")
     public String remover(@PathVariable("id") long id, RedirectAttributes attr) {
@@ -144,5 +144,7 @@ public class EleicaoController {
         attr.addFlashAttribute("mensagem", "Eleição excluída com sucesso.");
         return "redirect:/eleicao/listar";
     }
+
+    
 
 }

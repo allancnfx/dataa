@@ -8,8 +8,8 @@ import java.beans.PropertyEditorSupport;
  *
  * @author Allan
  *
- * Classe que converte o valor String do select combobox da view cadastro
- * candidato em Objeto do tipo Cargo.
+ * Classe que converte o valor String do radio buttom da view cadastro
+ * votacao em Objeto do tipo Candidato.
  * 
  */
 public class CandidatoConverter extends PropertyEditorSupport {

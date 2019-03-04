@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Spotmusic</title>
+        <title>Projeto Eleições</title>
 
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
         <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="/css/style.css" rel="stylesheet"/>
+        <script type="text/javascript">
+
+            $(document).ready(function (e) {
+                $("#divConteudo").hide();
+
+                $("#btnMostrarEsconder").click(function (e) {
+                    $("#divConteudo").toggle();
+                });
+            });
+
+        </script>
     </head>
     <body>
 
@@ -19,7 +30,7 @@
 
             <div th:if="${cargos != null}">
                 <h4>
-                    Cargos Cadastrados
+                    Cargos registrados
                 </h4>
 
                 <div th:if="${mensagem != null}">
@@ -32,6 +43,7 @@
                     <thead>
                         <tr>
                             <th>Nome Cargo</th>
+                            <th>Situação</th>
                             <th>Ação</th>
                         </tr>
                     </thead>
@@ -39,9 +51,14 @@
                     <tr th:each="cargo: ${cargos}">
 
                         <td th:text="${cargo.nomeCargo}">nome</td>
-                    <div th:if="${votacaos != null}">
-                        <td><a class="btn btn-sm btn-info" th:href="@{/eleicao/{eleicaoId}/eleitor/{eleitorId}/cargo/{cargoId}/votar(eleicaoId=${eleicaoId}, eleitorId=${eleitorId}, cargoId=${cargo.id})}">Votar</a></td>
-                    </div>
+                        <td>
+                    <th:block th:each="eleitor : ${eleitors}">
+                        <th:block th:each="votacao : ${votacaos}">
+                            <div  th:if="${votacao.eleitor.id} == ${eleitor.id} and ${votacao.cargo.id} == ${cargo.id}">Votado</div>
+                        </th:block>
+                    </th:block>
+                    </td>
+                    <td><a class="btn btn-sm btn-info"  th:href="@{/eleicao/{eleicaoId}/eleitor/{eleitorId}/cargo/{cargoId}/votar(eleicaoId=${eleicaoId}, eleitorId=${eleitorId}, cargoId=${cargo.id})}">Votar</a></td>
                     </tr>
 
                 </table>
@@ -50,7 +67,7 @@
             <div th:if="${#lists.isEmpty(cargos)}">
                 <div class="alert alert-info" role="alert">
                     <span class="glyphicon glyphicon-exclamation-sign"></span>
-                    0 eleições cadastradas!
+                    0 cargos registrados!
                 </div>
             </div>
             <hr/>

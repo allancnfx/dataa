@@ -61,5 +61,21 @@ public class VotacaoDaoImpl implements VotacaoDAO {
                 .getResultList().size();
     }
 
-   
+    @Override
+    public Votacao recuperarPorEleicaoIdEleitorIdCargoId(long eleicaoId, long eleitorId, long cargoId) {
+        return em.createQuery("select v from Votacao v where v.eleicao.id = :eleicaoId and v.eleitor.id = :eleitorId and v.cargo.id = :cargoId", Votacao.class)
+                .setParameter("eleicaoId", eleicaoId)
+                .setParameter("eleitorId", eleitorId)
+                .setParameter("cargoId", cargoId)
+                .getSingleResult();
+    }
+
+    
+    @Override
+    public List<Votacao> recuperarPorEleicaoIdEleitorIdCargoIdTeste(long eleicaoId, long eleitorId) {
+        return em.createQuery("select v  from Votacao v, Cargo c where v.eleicao.id = :eleicaoId and v.eleitor.id = :eleitorId and v.cargo.id = c.id", Votacao.class)
+                .setParameter("eleicaoId", eleicaoId)
+                .setParameter("eleitorId", eleitorId)
+                .getResultList();
+    }
 }

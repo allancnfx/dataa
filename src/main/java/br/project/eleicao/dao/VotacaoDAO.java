@@ -1,10 +1,7 @@
 package br.project.eleicao.dao;
 
 import br.project.eleicao.domain.Votacao;
-import java.awt.print.Pageable;
 import java.util.List;
-import org.springframework.data.domain.Page;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
  *
@@ -22,6 +19,10 @@ public interface VotacaoDAO  {
     void salvar(Votacao votacao);
 
     List<Votacao> recuperarPorEleicaoId(long eleicaoId);
+    
+    Votacao recuperarPorEleicaoIdEleitorIdCargoId(long eleicaoId, long eleitorId, long cargoId);
+    
+    List<Votacao> recuperarPorEleicaoIdEleitorIdCargoIdTeste(long eleicaoId, long eleitorId);
     
     int recuperarPorId(long id);
 

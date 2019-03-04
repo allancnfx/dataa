@@ -43,18 +43,22 @@
                         </tr>
                     </thead>
                     <tr th:each="eleicao: ${eleicoes}">
-                        <td><a th:text="${eleicao.nomeEleicao}" th:href="@{/eleicao/{id}/cargos/listar(id=${eleicao.id})}">nome</a></td>
-                        <td th:text="${eleicao.dataInicio}">Iinicio</td>
-                        <td th:text="${eleicao.dataFinal}">Fim</td>
-                        <td>
+                        <td><a th:text="${eleicao.nomeEleicao}" th:href="@{/eleicao/{id}/atualizar(id=${eleicao.id})}">nome</a></td>
+                        <td th:text="${#dates.format(new java.util.Date(eleicao.dataInicio), 'dd/MM/yy')}">Iinicio</td>
+                        <td th:text="${#dates.format(new java.util.Date(eleicao.dataFinal), 'dd/MM/yy')}">Fim</td>
+                        <td th:if="${eleicao.dataInicio.after(#dates.createNow())}">
                             <a class="btn btn-sm btn-info" th:href="@{/eleicao/{id}/atualizar(id=${eleicao.id})}">Editar</a>
                             <a class="btn btn-sm btn-danger" th:href="@{/eleicao/{id}/remover(id=${eleicao.id})}">Excluir</a>
                         </td>
-                        <td>
+                        <td th:if="${eleicao.dataInicio.before(#dates.createNow())}"></td>
+                    <td th:if="${eleicao.dataFinal.after(#dates.createNow())}">
+                        <td th:if="${eleicao.dataInicio.after(#dates.createNow())}">
                             <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/cargos/listar(id=${eleicao.id})}">Cargos</a>
                             <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/candidatos/listar(id=${eleicao.id})}">Candidatos</a>
-                            <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/eleitors/listar(id=${eleicao.id})}">Eleitor</a>
                         </td>
+                         <td th:if="${eleicao.dataInicio.before(#dates.createNow())}">                    <a class="btn btn-sm btn-primary" th:href="@{/eleicao/{id}/eleitors/listar(id=${eleicao.id})}">Eleitor</a>
+</td>
+                    </td>
                     </tr>
                 </table>
             </div>

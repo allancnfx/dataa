@@ -22,7 +22,8 @@
                         <span th:text="${mensagem}">mensagem</span>
                     </div>
                 </div>
-                <form th:action="@{/eleicao/{eleicaoId}/eleitor/{eleitorId}/cargo/{cargoId}/salvar(eleicaoId=${eleicaoId}, eleitorId=${eleitorId}, cargoId=${cargoId})}" th:method="post" th:object="${votacao}">
+                <form th:action="@{/eleicao/{eleicaoId}/eleitor/{eleitorId}/cargo/{cargoId}/salvar(eleicaoId=${eleicaoId}, eleitorId=${eleitorId}, cargoId=${cargoId})}" th:method="${votacao.id} == 0 ? post : put" th:object="${votacao}" enctype="multipart/form-data">
+                    <input id="id" type="hidden" th:field="*{id}"/>
                     <table  class="table">
                         <thead>
                             <tr>
@@ -35,10 +36,16 @@
                             <tr th:each="candidato: ${candidatos}" th:if="${candidato.cargoId.id} == ${cargoId}">
                                 <td th:text="${candidato.nomeCandidato}">candidato</td>
                                 <td th:text="${cargo.nomeCargo}">nomeCargo</td>
-                                <td><input type="radio" th:name="candidato" th:value="${candidato.id}" /></td>
+                                <td><input type="radio" th:name="candidatoId" th:field="*{candidatoId}" th:value="${candidato.id}" /></td>
                             </tr>
                         </div>
                     </table>
+                    <div th:if="${#fields.hasErrors('candidatoId')}" th:errors="*{candidatoId}"></div>
+                    <div th:if="${mensagem != null}">
+                        <div class="alert alert-info" role="alert">
+                            <span th:text="${mensagem}">mensagem</span>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Salvar</button>
                     </div>

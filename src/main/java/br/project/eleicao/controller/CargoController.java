@@ -103,7 +103,7 @@ public class CargoController {
         }
 
         cargoService.salvar(cargo, eleicaoId);
-        attr.addFlashAttribute("mensagem", "Cargo salva com sucesso.");
+        attr.addFlashAttribute("mensagem", "Cargo salvo com sucesso.");
         return "redirect:/eleicao/" + eleicaoId + "/cargos/listar";
     }
 
@@ -131,7 +131,7 @@ public class CargoController {
         }
 
         cargoService.atualizar(cargo, eleicaoId);
-        attr.addFlashAttribute("mensagem", "Cargo atualizada com sucesso.");
+        attr.addFlashAttribute("mensagem", "Cargo atualizado com sucesso.");
         return "redirect:/eleicao/" + eleicaoId + "/cargos/listar";
     }
 
@@ -143,7 +143,7 @@ public class CargoController {
     @GetMapping("/{cargoId}/remover")
     public String remover(@PathVariable("eleicaoId") long eleicaoId, @PathVariable("cargoId") long cargoId, RedirectAttributes attr) {
         cargoService.excluir(eleicaoId, cargoId);
-        attr.addFlashAttribute("mensagem", "Cargo excluída com sucesso.");
+        attr.addFlashAttribute("mensagem", "Cargo excluído com sucesso.");
         return "redirect:/eleicao/" + eleicaoId + "/cargos/listar";
     }
 

@@ -65,7 +65,7 @@ public class Candidato {
     @JoinColumn(name = "id_eleicao_fk")
     private Eleicao eleicao;
 
-    @OneToMany(mappedBy = "candidato", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "candidatoId", cascade = CascadeType.ALL)
     private List<Votacao> votacao;
 
     /**

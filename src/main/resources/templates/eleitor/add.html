@@ -2,15 +2,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>DATA A - Eleições</title>
+        <title>Projeto Eleições</title>
 
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
         <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="/css/style.css" rel="stylesheet"/>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"/>
+        <script type="text/javascript">
+            
+            function fMasc(objeto, mascara) {
+                obj = objeto
+                masc = mascara
+                setTimeout("fMascEx()", 1)
+            }
 
+            function fMascEx() {
+                obj.value = masc(obj.value)
+            }
+
+            function mCPF(cpf) {
+                cpf = cpf.replace(/\D/g, "")
+                cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
+                cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
+                cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+                return cpf
+            }
+        </script>
 
     </head>
     <body>
@@ -30,8 +48,8 @@
                         <div th:if="${#fields.hasErrors('nomeEleitor')}" th:errors="*{nomeEleitor}"></div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="nome">Cpf:</label>
-                        <input class="form-control cpf" id="cpfEleitor" type="text" th:field="*{cpfEleitor}" data-mask="999.999.999-99" placeholder="000.000.000-00"/>
+                        <label for="nome">CPF:</label>
+                        <input class="form-control" id="RegraValida" type="text" th:field="*{cpfEleitor}" placeholder="000.000.000-00" onkeydown="javascript: fMasc(this, mCPF);"/>
                         <div th:if="${#fields.hasErrors('cpfEleitor')}" th:errors="*{cpfEleitor}"></div>
                     </div>
                 </div>
@@ -48,9 +66,8 @@
                 <p>&copy; 2019 Allan Christian Vieira</p>
             </footer>
         </div>
-        <script>
-            $('.cpf').mask('000.000.000-00', {reverse: true});
-        </script>
+
+
     </body>
 
 </html>
