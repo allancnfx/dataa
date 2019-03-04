@@ -8,6 +8,13 @@
 
         <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="/css/style.css" rel="stylesheet"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#candidatoId1").attr("checked", "checked");
+            })
+        </script>
     </head>
     <body>
 
@@ -22,7 +29,7 @@
                         <span th:text="${mensagem}">mensagem</span>
                     </div>
                 </div>
-                <form th:action="@{/eleicao/{eleicaoId}/eleitor/{eleitorId}/cargo/{cargoId}/salvar(eleicaoId=${eleicaoId}, eleitorId=${eleitorId}, cargoId=${cargoId})}" th:method="${votacao.id} == 0 ? post : put" th:object="${votacao}" enctype="multipart/form-data">
+                <form th:action="@{/eleicao/{eleicaoId}/eleitor/{eleitorId}/cargo/{cargoId}/salvar(eleicaoId=${eleicaoId}, eleitorId=${eleitorId}, cargoId=${cargoId})}" th:method="${votacao.id} == 0 ? post : put" th:object="${votacao}">
                     <input id="id" type="hidden" th:field="*{id}"/>
                     <table  class="table">
                         <thead>
@@ -32,11 +39,13 @@
                                 <th>Selecionar</th>
                             </tr>
                         </thead>
-                        <div th:each="cargo: ${cargos}">
-                            <tr th:each="candidato: ${candidatos}" th:if="${candidato.cargoId.id} == ${cargoId}">
+                        <div th:each="cargo : ${cargos}">
+                            <tr th:each="candidato, c: ${candidatos}" th:if="${candidato.cargoId.id} == ${cargoId}">
                                 <td th:text="${candidato.nomeCandidato}">candidato</td>
                                 <td th:text="${cargo.nomeCargo}">nomeCargo</td>
-                                <td><input type="radio" th:name="candidatoId" th:field="*{candidatoId}" th:value="${candidato.id}" /></td>
+                                <td th:text="${c.index}">nomeCargo</td>
+
+                                <td><input type="radio" th:name="candidatoId" th:field="*{candidatoId}" th:value="${candidato.id}" checked="true"/></td>
                             </tr>
                         </div>
                     </table>

@@ -148,6 +148,8 @@ public class VotacaoController {
     @PostMapping("cargo/{cargoId}/salvar")
     public ModelAndView salvar(@PathVariable("eleicaoId") long eleicaoId, @PathVariable("eleitorId") long eleitorId, @PathVariable("cargoId") long cargoId, @Valid @ModelAttribute("votacao") Votacao votacao, BindingResult result, RedirectAttributes attr, ModelMap model) {
 
+        
+
         votacaoService.salvar(votacao, eleicaoId, eleitorId, cargoId, protocolo());
         model.addAttribute("votacaos", votacaoService.recuperarPorEleicaoIdEleitorIdCargoId(eleicaoId, eleitorId, cargoId));
         attr.addFlashAttribute("mensagem", "Voto salvo com sucesso.");
