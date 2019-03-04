@@ -43,8 +43,6 @@
                             <tr th:each="candidato, c: ${candidatos}" th:if="${candidato.cargoId.id} == ${cargoId}">
                                 <td th:text="${candidato.nomeCandidato}">candidato</td>
                                 <td th:text="${cargo.nomeCargo}">nomeCargo</td>
-                                <td th:text="${c.index}">nomeCargo</td>
-
                                 <td><input type="radio" th:name="candidatoId" th:field="*{candidatoId}" th:value="${candidato.id}" checked="true"/></td>
                             </tr>
                         </div>

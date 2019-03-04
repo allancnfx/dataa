@@ -52,8 +52,8 @@ public class Eleitor implements Serializable {
     private String nomeEleitor;
 
     @NotBlank
-    @Size(min = 4, max = 60)
-    @Column(nullable = false, length = 60)
+    @Size(min = 14, max = 14)
+    @Column(nullable = false, length = 14)
     private String cpfEleitor;
 
     @OneToMany(mappedBy = "eleitor", cascade = CascadeType.ALL)
